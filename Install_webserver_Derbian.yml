@@ -1,0 +1,7 @@
+---
+# Spliting of the file from the main file "install_multiple_package_core"
+# Doing some exercise with include and import commands
+- name: Installing webserver on RedHat family servers
+  apt:
+    name: httpd
+    state: present

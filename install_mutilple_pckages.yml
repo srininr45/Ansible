@@ -1,0 +1,19 @@
+---
+ - name: Simple play book to install multiple packages
+   hosts: web_server
+   gather_facts: true
+   become: yes
+   # include_tasks are dynamic
+   tasks:
+     - include_tasks: install_webservers_{{ansible_os_family}}.yml
+     - include_tasks: install_java_{{ansible_os_family}}.yml
+ # Import tasks are static.
+   tasks:
+     - import_tasks: install_webservers_Redhat.yml
+       when: ansible_os_family=="RedHat"
+     - import_tasks: install_java_Redhat.yml
+       when: ansible_os_family=="RedHat"
+     - import_tasks: install_webservers_Derbian.yml
+       when: ansible_os_family=="Derbian"
+     - import_tasks: install_java_Derbian.yml
+       when: ansible_os_family=="Derbian"
